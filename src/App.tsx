@@ -19,6 +19,8 @@ function App() {
           Learn React
         </a>
         <p>ARE WE DEPLOYING YET</p>
+
+        <p>DO WE HAVE SOME CI???</p>
       </header>
     </div>
   );
