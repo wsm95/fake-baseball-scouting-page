@@ -16,8 +16,9 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React butts
+          Learn React
         </a>
+        <p>ARE WE DEPLOYING YET</p>
       </header>
     </div>
   );
