@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/fake-baseball-scouting-page/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/fake-baseball-scouting-page/static/js/main.6967fc1f.chunk.js",
-    "main.js.map": "/fake-baseball-scouting-page/static/js/main.6967fc1f.chunk.js.map",
-    "runtime-main.js": "/fake-baseball-scouting-page/static/js/runtime-main.8d52082f.js",
-    "runtime-main.js.map": "/fake-baseball-scouting-page/static/js/runtime-main.8d52082f.js.map",
-    "static/js/2.6e9f8806.chunk.js": "/fake-baseball-scouting-page/static/js/2.6e9f8806.chunk.js",
-    "static/js/2.6e9f8806.chunk.js.map": "/fake-baseball-scouting-page/static/js/2.6e9f8806.chunk.js.map",
-    "static/js/3.01a66a2b.chunk.js": "/fake-baseball-scouting-page/static/js/3.01a66a2b.chunk.js",
-    "static/js/3.01a66a2b.chunk.js.map": "/fake-baseball-scouting-page/static/js/3.01a66a2b.chunk.js.map",
+    "main.css": "/fake-baseball-scouting-page/static/css/main.cb9b5d0c.chunk.css",
+    "main.js": "/fake-baseball-scouting-page/static/js/main.fb1f623b.chunk.js",
+    "main.js.map": "/fake-baseball-scouting-page/static/js/main.fb1f623b.chunk.js.map",
+    "runtime-main.js": "/fake-baseball-scouting-page/static/js/runtime-main.d11a4505.js",
+    "runtime-main.js.map": "/fake-baseball-scouting-page/static/js/runtime-main.d11a4505.js.map",
+    "static/js/2.9910a168.chunk.js": "/fake-baseball-scouting-page/static/js/2.9910a168.chunk.js",
+    "static/js/2.9910a168.chunk.js.map": "/fake-baseball-scouting-page/static/js/2.9910a168.chunk.js.map",
+    "static/js/3.1fb91f71.chunk.js": "/fake-baseball-scouting-page/static/js/3.1fb91f71.chunk.js",
+    "static/js/3.1fb91f71.chunk.js.map": "/fake-baseball-scouting-page/static/js/3.1fb91f71.chunk.js.map",
     "index.html": "/fake-baseball-scouting-page/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/fake-baseball-scouting-page/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.6e9f8806.chunk.js.LICENSE.txt": "/fake-baseball-scouting-page/static/js/2.6e9f8806.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/fake-baseball-scouting-page/static/media/logo.6ce24c58.svg"
+    "static/css/main.cb9b5d0c.chunk.css.map": "/fake-baseball-scouting-page/static/css/main.cb9b5d0c.chunk.css.map",
+    "static/js/2.9910a168.chunk.js.LICENSE.txt": "/fake-baseball-scouting-page/static/js/2.9910a168.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.8d52082f.js",
-    "static/js/2.6e9f8806.chunk.js",
-    "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.6967fc1f.chunk.js"
+    "static/js/runtime-main.d11a4505.js",
+    "static/js/2.9910a168.chunk.js",
+    "static/css/main.cb9b5d0c.chunk.css",
+    "static/js/main.fb1f623b.chunk.js"
   ]
 }
