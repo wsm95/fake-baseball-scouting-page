@@ -1,14 +1,15 @@
 import { useCallback, useState } from "react";
+import { Play } from "../../interfaces/play";
 import { useMLRApi } from "../useMLRApi/useMLRApi";
 
 export const useGetGameLog = (): [
-  any,
+  Play[] | undefined,
   boolean,
   any,
-  (gameId: number) => Promise<any>
+  (gameId: number) => Promise<Play[]>
 ] => {
   const [gameLog, setGameLog] = useState();
-  const { get, response, loading, error } = useMLRApi();
+  const { get, response, loading, error } = useMLRApi<Play[]>();
 
   const fetchGameLog = useCallback(
     async (gameId: number) => {

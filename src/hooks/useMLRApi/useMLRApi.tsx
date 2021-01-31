@@ -1,5 +1,5 @@
-import useFetch from "use-http";
+import useFetch, { UseFetch } from "use-http";
 
-export const useMLRApi = () => {
-  return useFetch("https://redditball.com/api/v1");
+export const useMLRApi = <T,>(apiVerson: string = "v1") => {
+  return useFetch<T>(`https://redditball.com/api/${apiVerson}`);
 };

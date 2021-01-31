@@ -10,8 +10,11 @@ export const GamePage: React.FC = () => {
 
   return (
     <div>
-      Coming soon: a game page.
-      {loadingGameLogs ? "Loading..." : JSON.stringify(gameLogs, null, 2)}
+      {loadingGameLogs ? (
+        "Loading..."
+      ) : (
+        <pre id="json">{JSON.stringify(gameLogs, null, 2)}</pre>
+      )}
     </div>
   );
 };
