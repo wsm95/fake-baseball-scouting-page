@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/fake-baseball-scouting-page/static/css/main.cb9b5d0c.chunk.css",
-    "main.js": "/fake-baseball-scouting-page/static/js/main.7cebad3f.chunk.js",
-    "main.js.map": "/fake-baseball-scouting-page/static/js/main.7cebad3f.chunk.js.map",
-    "runtime-main.js": "/fake-baseball-scouting-page/static/js/runtime-main.d11a4505.js",
-    "runtime-main.js.map": "/fake-baseball-scouting-page/static/js/runtime-main.d11a4505.js.map",
-    "static/js/2.c270a849.chunk.js": "/fake-baseball-scouting-page/static/js/2.c270a849.chunk.js",
-    "static/js/2.c270a849.chunk.js.map": "/fake-baseball-scouting-page/static/js/2.c270a849.chunk.js.map",
-    "static/js/3.1fb91f71.chunk.js": "/fake-baseball-scouting-page/static/js/3.1fb91f71.chunk.js",
-    "static/js/3.1fb91f71.chunk.js.map": "/fake-baseball-scouting-page/static/js/3.1fb91f71.chunk.js.map",
+    "main.js": "/fake-baseball-scouting-page/static/js/main.bd9a992c.chunk.js",
+    "main.js.map": "/fake-baseball-scouting-page/static/js/main.bd9a992c.chunk.js.map",
+    "runtime-main.js": "/fake-baseball-scouting-page/static/js/runtime-main.25884cc5.js",
+    "runtime-main.js.map": "/fake-baseball-scouting-page/static/js/runtime-main.25884cc5.js.map",
+    "static/js/2.98c2a4a5.chunk.js": "/fake-baseball-scouting-page/static/js/2.98c2a4a5.chunk.js",
+    "static/js/2.98c2a4a5.chunk.js.map": "/fake-baseball-scouting-page/static/js/2.98c2a4a5.chunk.js.map",
+    "static/js/3.c6b6ea27.chunk.js": "/fake-baseball-scouting-page/static/js/3.c6b6ea27.chunk.js",
+    "static/js/3.c6b6ea27.chunk.js.map": "/fake-baseball-scouting-page/static/js/3.c6b6ea27.chunk.js.map",
     "index.html": "/fake-baseball-scouting-page/index.html",
     "static/css/main.cb9b5d0c.chunk.css.map": "/fake-baseball-scouting-page/static/css/main.cb9b5d0c.chunk.css.map",
-    "static/js/2.c270a849.chunk.js.LICENSE.txt": "/fake-baseball-scouting-page/static/js/2.c270a849.chunk.js.LICENSE.txt"
+    "static/js/2.98c2a4a5.chunk.js.LICENSE.txt": "/fake-baseball-scouting-page/static/js/2.98c2a4a5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d11a4505.js",
-    "static/js/2.c270a849.chunk.js",
+    "static/js/runtime-main.25884cc5.js",
+    "static/js/2.98c2a4a5.chunk.js",
     "static/css/main.cb9b5d0c.chunk.css",
-    "static/js/main.7cebad3f.chunk.js"
+    "static/js/main.bd9a992c.chunk.js"
   ]
 }
