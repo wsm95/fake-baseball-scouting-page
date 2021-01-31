@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/fake-baseball-scouting-page/static/css/main.cb9b5d0c.chunk.css",
-    "main.js": "/fake-baseball-scouting-page/static/js/main.bd9a992c.chunk.js",
-    "main.js.map": "/fake-baseball-scouting-page/static/js/main.bd9a992c.chunk.js.map",
+    "main.css": "/fake-baseball-scouting-page/static/css/main.759b209b.chunk.css",
+    "main.js": "/fake-baseball-scouting-page/static/js/main.d7941c2b.chunk.js",
+    "main.js.map": "/fake-baseball-scouting-page/static/js/main.d7941c2b.chunk.js.map",
     "runtime-main.js": "/fake-baseball-scouting-page/static/js/runtime-main.25884cc5.js",
     "runtime-main.js.map": "/fake-baseball-scouting-page/static/js/runtime-main.25884cc5.js.map",
     "static/js/2.98c2a4a5.chunk.js": "/fake-baseball-scouting-page/static/js/2.98c2a4a5.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.c6b6ea27.chunk.js": "/fake-baseball-scouting-page/static/js/3.c6b6ea27.chunk.js",
     "static/js/3.c6b6ea27.chunk.js.map": "/fake-baseball-scouting-page/static/js/3.c6b6ea27.chunk.js.map",
     "index.html": "/fake-baseball-scouting-page/index.html",
-    "static/css/main.cb9b5d0c.chunk.css.map": "/fake-baseball-scouting-page/static/css/main.cb9b5d0c.chunk.css.map",
+    "static/css/main.759b209b.chunk.css.map": "/fake-baseball-scouting-page/static/css/main.759b209b.chunk.css.map",
     "static/js/2.98c2a4a5.chunk.js.LICENSE.txt": "/fake-baseball-scouting-page/static/js/2.98c2a4a5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.25884cc5.js",
     "static/js/2.98c2a4a5.chunk.js",
-    "static/css/main.cb9b5d0c.chunk.css",
-    "static/js/main.bd9a992c.chunk.js"
+    "static/css/main.759b209b.chunk.css",
+    "static/js/main.d7941c2b.chunk.js"
   ]
 }
