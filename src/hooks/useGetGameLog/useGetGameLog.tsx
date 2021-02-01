@@ -8,12 +8,12 @@ export const useGetGameLog = (): [
   any,
   (gameId: number) => Promise<Play[]>
 ] => {
-  const [gameLog, setGameLog] = useState();
+  const [gameLog, setGameLog] = useState<Play[]>();
   const { get, response, loading, error } = useMLRApi<Play[]>();
 
   const fetchGameLog = useCallback(
     async (gameId: number) => {
-      const fetchedGameLog = await get(`games/${gameId}/log`);
+      const fetchedGameLog = (await get(`games/${gameId}/log`)) as Play[];
 
       if (response.ok) {
         setGameLog(fetchedGameLog);
