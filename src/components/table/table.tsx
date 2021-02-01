@@ -4,27 +4,23 @@ import { Play } from "../../interfaces/play";
 
 interface TableProps {
   plays: Play[];
-  awayTeamId: number;
 }
 
 export const Table = (props: TableProps) => {
-  const { plays, awayTeamId } = props;
-  console.log("awayTeamId", awayTeamId);
+  const { plays } = props;
+
   const data = React.useMemo(
     () =>
-      plays
-        .filter((p: Play) => p.beforeState.inning[0] === `B`)
-        .map((p: Play) => ({
-          inning: p.beforeState.inning,
-          pitcher: p.pitcher.firstName + " " + p.pitcher.lastName,
-          batter: p.batter.firstName + " " + p.batter.lastName,
-          pitch: p.pitch,
-          swing: p.swing,
-          diff: p.diff,
-          result: p.result,
-          score: p.afterState.awayScore + "-" + p.afterState.homeScore
-        }))
-        .reverse(),
+      plays.map((p: Play) => ({
+        inning: p.beforeState.inning,
+        pitcher: p.pitcher.firstName + " " + p.pitcher.lastName,
+        batter: p.batter.firstName + " " + p.batter.lastName,
+        pitch: p.pitch,
+        swing: p.swing,
+        diff: p.diff,
+        result: p.result,
+        score: p.afterState.awayScore + "-" + p.afterState.homeScore
+      })),
     [plays]
   );
 

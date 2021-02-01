@@ -4,6 +4,8 @@ import Select from "react-select";
 import { useGetGames } from "../../../hooks/useGetGames/useGetGames";
 import { Game } from "../../../interfaces/game";
 import { Table } from "../../table/table";
+import { Play } from "../../../interfaces/play";
+import { LineGraph } from "../../lineGraph/lineGraph";
 
 export const GamePage: React.FC = () => {
   const [selectedSeason, setSelectedSeason] = useState(6);
@@ -67,7 +69,19 @@ export const GamePage: React.FC = () => {
       {loadingGameLogs ? (
         "Loading..."
       ) : selectedGame && gameLog ? (
-        <Table plays={gameLog} awayTeamId={selectedGame.awayTeam.id} />
+        <>
+          <Table
+            plays={gameLog
+              .filter((p: Play) => p.beforeState.inning[0] === `B`)
+              .reverse()}
+          />
+
+          <LineGraph
+            plays={gameLog
+              .filter((p: Play) => p.beforeState.inning[0] === `B`)
+              .reverse()}
+          />
+        </>
       ) : (
         "Select a game"
       )}
