@@ -3,12 +3,13 @@ import { useGetGameLog } from "../../../hooks/useGetGameLog/useGetGameLog";
 import Select from "react-select";
 import { useGetGames } from "../../../hooks/useGetGames/useGetGames";
 import { Game } from "../../../interfaces/game";
+import { Table } from "../../table/table";
 
 export const GamePage: React.FC = () => {
   const [selectedSeason, setSelectedSeason] = useState(6);
   const [selectedSession, setSelectedSession] = useState(1);
   const [selectedGame, setSelectedGame] = useState<Game>();
-
+  console.log("selectedGame", selectedGame);
   const [gameLog, loadingGameLogs, , fetchGameLog] = useGetGameLog();
   const [games, loadingGames, , fetchGames] = useGetGames();
 
@@ -63,11 +64,10 @@ export const GamePage: React.FC = () => {
           value: g
         }))}
       />
-
       {loadingGameLogs ? (
         "Loading..."
-      ) : selectedGame ? (
-        <pre id="json">{JSON.stringify(gameLog, null, 2)}</pre>
+      ) : selectedGame && gameLog ? (
+        <Table plays={gameLog} awayTeamId={selectedGame.awayTeam.id} />
       ) : (
         "Select a game"
       )}

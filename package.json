@@ -16,6 +16,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "react-select": "^4.0.2",
+    "react-table": "^7.6.3",
     "typescript": "^4.1.2",
     "use-http": "^1.0.16",
     "web-vitals": "^0.2.4"
@@ -49,6 +50,7 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
     "@types/react-select": "^4.0.11",
+    "@types/react-table": "^7.0.28",
     "gh-pages": "^3.1.0"
   }
 }
