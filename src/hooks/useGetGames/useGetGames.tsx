@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { Game } from "../../interfaces/game";
-import { Play } from "../../interfaces/play";
 import { useMLRApi } from "../useMLRApi/useMLRApi";
 
 export const useGetGames = (): [
