@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Chart } from "react-charts";
+import ReactApexChart from "react-apexcharts";
 import { Play } from "../../interfaces/play";
 
 interface LineGraphProps {
@@ -9,42 +9,41 @@ interface LineGraphProps {
 export const LineGraph = (props: LineGraphProps) => {
   const { plays } = props;
 
-  const data = useMemo(
+  const options = useMemo(
+    () => ({
+      chart: {
+        id: "line",
+        zoom: {
+          enabled: true
+        }
+      },
+      xaxis: {
+        categories: [...Array(plays.length).keys()].map(x => ++x)
+      },
+      markers: {
+        size: 5,
+        showNullDataPoints: false
+      }
+    }),
+    [plays]
+  );
+
+  const series = useMemo(
     () => [
       {
-        label: "Pitches",
-        data: plays.map((play: Play, index: number) => ({
-          primary: index,
-          secondary: play.pitch
-        }))
+        name: "pitches",
+        data: plays.map((play: Play) => play.pitch)
       }
     ],
     [plays]
   );
 
-  const series = useMemo(
-    () => ({
-      showPoints: true
-    }),
-    []
-  );
-
-  const axes = React.useMemo(
-    () => [
-      { primary: true, type: "linear", position: "bottom" },
-      { type: "linear", position: "left" }
-    ],
-    []
-  );
   return (
-    <div
-      style={{
-        width: "400px",
-        height: "300px",
-        marginLeft: 16
-      }}
-    >
-      <Chart data={data} series={series} axes={axes} tooltip />
-    </div>
+    <ReactApexChart
+      options={options}
+      series={series}
+      type="line"
+      height={350}
+    />
   );
 };
