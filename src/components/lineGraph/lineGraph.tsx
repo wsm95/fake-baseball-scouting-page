@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import { Play } from "../../interfaces/play";
 
@@ -14,8 +14,9 @@ export const LineGraph = (props: LineGraphProps) => {
       chart: {
         id: "line",
         zoom: {
-          enabled: true
-        }
+          enabled: false
+        },
+        redrawOnParentResize: false
       },
       xaxis: {
         categories: [...Array(plays.length).keys()].map(x => ++x)
@@ -43,7 +44,7 @@ export const LineGraph = (props: LineGraphProps) => {
       options={options}
       series={series}
       type="line"
-      height={350}
+      height="100%"
     />
   );
 };
