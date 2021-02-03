@@ -24,6 +24,11 @@ export const LineGraph = (props: LineGraphProps) => {
       markers: {
         size: 5,
         showNullDataPoints: false
+      },
+      stroke: { width: [7, 2, 5], dashArray: [0, 3, 0] },
+      yaxis: {
+        min: 0,
+        max: 1000
       }
     }),
     [plays]
@@ -32,8 +37,28 @@ export const LineGraph = (props: LineGraphProps) => {
   const series = useMemo(
     () => [
       {
-        name: "pitches",
+        name: "Pitch",
+        type: "line",
         data: plays.map((play: Play) => play.pitch)
+      },
+      {
+        name: "Swing",
+        type: "line",
+        data: plays.map((play: Play) => play.swing)
+      },
+      {
+        name: "Delta",
+        type: "column",
+        data: plays.map((currentPlay: Play, index: number, plays: Play[]) => {
+          if (index > 0 && plays[index - 1]) {
+            let delta = Math.abs(currentPlay.pitch - plays[index - 1].pitch);
+
+            return delta > 500 ? 1000 - delta : delta;
+            // return Math.abs(delta) > 500 ? delta + 1000 : Math.abs(delta);
+          } else {
+            return null;
+          }
+        })
       }
     ],
     [plays]
