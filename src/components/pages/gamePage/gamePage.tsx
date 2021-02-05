@@ -16,15 +16,19 @@ import {
   Toggle
 } from "rsuite";
 import { useLeagueToggleContext } from "../../../context/LeagueToggleContext/leagueToggleContext";
+import { mlrTeamsMap } from "../../../data/teamsMaps";
+import { useGetActiveGame } from "../../../hooks/useGetActiveGame/useGetActiveGame";
 
 export const GamePage: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedSeason, setSelectedSeason] = useState(6);
   const [selectedSession, setSelectedSession] = useState(1);
   const [selectedGame, setSelectedGame] = useState<Game>();
+  const [selectedActiveTeam, setSelectedActiveTeam] = useState("");
 
   const [gameLog, loadingGameLogs, , fetchGameLog] = useGetGameLog();
   const [games, loadingGames, , fetchGames] = useGetGames();
+  const [activeGame, , , fetchActiveGame] = useGetActiveGame();
 
   const { currentLeague, setCurrentLeague } = useLeagueToggleContext();
 
@@ -45,6 +49,20 @@ export const GamePage: React.FC = () => {
     }
   }, [selectedGame, fetchGameLog]);
 
+  useEffect(() => {
+    if (selectedActiveTeam) {
+      fetchActiveGame(selectedActiveTeam);
+    }
+  }, [selectedActiveTeam, fetchActiveGame]);
+
+  useEffect(() => {
+    if (activeGame) {
+      fetchGameLog(activeGame.id);
+    }
+  }, [activeGame, fetchGameLog]);
+
+  console.log(gameLog);
+
   return (
     <Container style={{ height: "100%" }}>
       <Header>
@@ -59,6 +77,26 @@ export const GamePage: React.FC = () => {
               }}
               checkedChildren="MiLR"
               unCheckedChildren="MiLR"
+            />
+
+            <Select
+              value={{
+                label: !mlrTeamsMap[selectedActiveTeam]
+                  ? "Selected team for their active game"
+                  : selectedActiveTeam,
+                value: selectedActiveTeam
+              }}
+              styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+              menuPortalTarget={document.body}
+              onChange={(team: any) => {
+                setSelectedActiveTeam(team.value);
+              }}
+              options={
+                Object.entries(mlrTeamsMap).map(([tag, teamName]) => ({
+                  label: teamName,
+                  value: tag
+                })) as any
+              }
             />
           </FlexboxGrid.Item>
 
@@ -123,7 +161,7 @@ export const GamePage: React.FC = () => {
         >
           {loadingGameLogs ? (
             <Loader size="lg" />
-          ) : selectedGame && gameLog ? (
+          ) : (selectedGame || selectedActiveTeam) && gameLog ? (
             <FlexboxGrid.Item style={{ width: "100%", height: "100%" }}>
               <Nav
                 appearance={"tabs"}
@@ -132,8 +170,27 @@ export const GamePage: React.FC = () => {
                   setSelectedTab(e);
                 }}
               >
-                <Nav.Item eventKey={0}>{selectedGame.awayTeam.name}</Nav.Item>
-                <Nav.Item eventKey={1}>{selectedGame.homeTeam.name}</Nav.Item>
+                {selectedGame ? (
+                  <>
+                    <Nav.Item eventKey={0}>
+                      {selectedGame.awayTeam.name}
+                    </Nav.Item>
+                    <Nav.Item eventKey={1}>
+                      {selectedGame.homeTeam.name}
+                    </Nav.Item>
+                  </>
+                ) : (
+                  activeGame && (
+                    <>
+                      <Nav.Item eventKey={0}>
+                        {activeGame.awayTeam.name}
+                      </Nav.Item>
+                      <Nav.Item eventKey={1}>
+                        {activeGame.homeTeam.name}
+                      </Nav.Item>
+                    </>
+                  )
+                )}
               </Nav>
 
               <FlexboxGrid.Item style={{ height: "auto" }}>
