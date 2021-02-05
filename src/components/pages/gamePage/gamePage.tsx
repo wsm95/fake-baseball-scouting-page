@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetGameLog } from "../../../hooks/useGetGameLog/useGetGameLog";
 import Select from "react-select";
 import { useGetGames } from "../../../hooks/useGetGames/useGetGames";
@@ -6,7 +6,16 @@ import { Game } from "../../../interfaces/game";
 import { PlayTable } from "../../playTable/playTable";
 import { Play } from "../../../interfaces/play";
 import { LineGraph } from "../../lineGraph/lineGraph";
-import { Container, Content, FlexboxGrid, Header, Loader, Nav } from "rsuite";
+import {
+  Container,
+  Content,
+  FlexboxGrid,
+  Header,
+  Loader,
+  Nav,
+  Toggle
+} from "rsuite";
+import { useLeagueToggleContext } from "../../../context/LeagueToggleContext/leagueToggleContext";
 
 export const GamePage: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -16,6 +25,10 @@ export const GamePage: React.FC = () => {
 
   const [gameLog, loadingGameLogs, , fetchGameLog] = useGetGameLog();
   const [games, loadingGames, , fetchGames] = useGetGames();
+
+  const { currentLeague, setCurrentLeague } = useLeagueToggleContext();
+
+  console.log(currentLeague);
 
   useEffect(() => {
     const fetchGamesWrapper = async () => {
@@ -35,55 +48,70 @@ export const GamePage: React.FC = () => {
   return (
     <Container style={{ height: "100%" }}>
       <Header>
-        <FlexboxGrid justify="end">
-          <FlexboxGrid.Item colspan={3}>
-            <Select
-              value={{ label: selectedSeason, value: selectedSeason }}
-              styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-              menuPortalTarget={document.body}
-              onChange={(season: any) => {
-                setSelectedSeason(season.value);
+        <FlexboxGrid justify="space-between" style={{ padding: 4 }}>
+          <FlexboxGrid.Item>
+            <Toggle
+              size="md"
+              checked={currentLeague === "milr"}
+              onChange={(checked: boolean) => {
+                console.log("checked", checked);
+                setCurrentLeague(checked ? "milr" : "mlr");
               }}
-              options={[...Array(6).keys()]
-                .map(x => ++x)
-                .map(s => ({ label: s, value: s }))}
+              checkedChildren="MiLR"
+              unCheckedChildren="MiLR"
             />
           </FlexboxGrid.Item>
 
-          <FlexboxGrid.Item colspan={3}>
-            <Select
-              value={{ label: selectedSession, value: selectedSession }}
-              styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-              menuPortalTarget={document.body}
-              onChange={(season: any) => {
-                setSelectedSession(season.value);
-              }}
-              options={[...Array(21).keys()]
-                .map(x => ++x)
-                .map(s => ({ label: s, value: s }))}
-            />
-          </FlexboxGrid.Item>
+          <FlexboxGrid justify="end" style={{ width: "50%" }}>
+            <FlexboxGrid.Item colspan={3}>
+              <Select
+                value={{ label: selectedSeason, value: selectedSeason }}
+                styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                menuPortalTarget={document.body}
+                onChange={(season: any) => {
+                  setSelectedSeason(season.value);
+                }}
+                options={[...Array(6).keys()]
+                  .map(x => ++x)
+                  .map(s => ({ label: s, value: s }))}
+              />
+            </FlexboxGrid.Item>
 
-          <FlexboxGrid.Item colspan={6}>
-            <Select
-              isLoading={loadingGames}
-              styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-              menuPortalTarget={document.body}
-              value={{
-                label: selectedGame
-                  ? `${selectedGame.awayTeam.name} @ ${selectedGame.homeTeam.name}`
-                  : "Pick game",
-                value: selectedGame
-              }}
-              onChange={(game: any) => {
-                setSelectedGame(game.value);
-              }}
-              options={games?.map(g => ({
-                label: `${g.awayTeam.name} @ ${g.homeTeam.name}`,
-                value: g
-              }))}
-            />
-          </FlexboxGrid.Item>
+            <FlexboxGrid.Item colspan={3}>
+              <Select
+                value={{ label: selectedSession, value: selectedSession }}
+                styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                menuPortalTarget={document.body}
+                onChange={(season: any) => {
+                  setSelectedSession(season.value);
+                }}
+                options={[...Array(21).keys()]
+                  .map(x => ++x)
+                  .map(s => ({ label: s, value: s }))}
+              />
+            </FlexboxGrid.Item>
+
+            <FlexboxGrid.Item colspan={6}>
+              <Select
+                isLoading={loadingGames}
+                styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                menuPortalTarget={document.body}
+                value={{
+                  label: selectedGame
+                    ? `${selectedGame.awayTeam.name} @ ${selectedGame.homeTeam.name}`
+                    : "Pick game",
+                  value: selectedGame
+                }}
+                onChange={(game: any) => {
+                  setSelectedGame(game.value);
+                }}
+                options={games?.map(g => ({
+                  label: `${g.awayTeam.name} @ ${g.homeTeam.name}`,
+                  value: g
+                }))}
+              />
+            </FlexboxGrid.Item>
+          </FlexboxGrid>
         </FlexboxGrid>
       </Header>
 

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Game } from "../../interfaces/game";
-import { useMLRApi } from "../useMLRApi/useMLRApi";
+import { useRedditBallApi } from "../useRedditBallApi/useRedditBallApi";
 
 export const useGetGames = (): [
   Game[] | undefined,
@@ -9,7 +9,7 @@ export const useGetGames = (): [
   (season: number, session: number) => Promise<Game[]>
 ] => {
   const [games, setGames] = useState<Game[]>();
-  const { get, response, loading, error } = useMLRApi<Game[]>();
+  const { get, response, loading, error } = useRedditBallApi<Game[]>();
 
   const fetchGameLog = useCallback(
     async (season: number, session: number) => {
