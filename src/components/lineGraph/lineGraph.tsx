@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
+import { isNumber } from "util";
 import { Play } from "../../interfaces/play";
 
 interface LineGraphProps {
@@ -8,7 +9,7 @@ interface LineGraphProps {
 
 export const LineGraph = (props: LineGraphProps) => {
   const { plays } = props;
-
+  console.log(plays);
   const options = useMemo(
     () => ({
       chart: {
@@ -50,11 +51,15 @@ export const LineGraph = (props: LineGraphProps) => {
         name: "Delta",
         type: "column",
         data: plays.map((currentPlay: Play, index: number, plays: Play[]) => {
-          if (index > 0 && plays[index - 1]) {
+          if (
+            index > 0 &&
+            plays[index - 1] &&
+            currentPlay.pitch &&
+            currentPlay.swing
+          ) {
             let delta = Math.abs(currentPlay.pitch - plays[index - 1].pitch);
 
             return delta > 500 ? 1000 - delta : delta;
-            // return Math.abs(delta) > 500 ? delta + 1000 : Math.abs(delta);
           } else {
             return null;
           }
