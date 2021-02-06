@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
-import { isNumber } from "util";
 import { Play } from "../../interfaces/play";
 
 interface LineGraphProps {
