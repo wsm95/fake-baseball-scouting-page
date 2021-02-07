@@ -16,7 +16,7 @@ export const Routes: React.FC = () => {
         <Route path="/game">
           <GamePage />
         </Route>
-        <Route path="/player">
+        <Route path="/player/:playerId">
           <PlayerPage />
         </Route>
       </Switch>

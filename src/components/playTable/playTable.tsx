@@ -1,11 +1,13 @@
 import React from "react";
 import { Play } from "../../interfaces/play";
-import { Table } from "rsuite";
+import { Table, TableCellProps } from "rsuite";
+import { Link } from "react-router-dom";
+import { Player } from "../../interfaces/player";
 
 interface TableColumn {
   id: number;
-  pitcher: string;
-  batter: string;
+  pitcher: Player;
+  batter: Player;
   pitch: number;
   swing: number;
   diff: number;
@@ -29,8 +31,8 @@ export const PlayTable = (props: PlayTableProps) => {
 
         acc[p.beforeState.inning].push({
           id: p.id,
-          pitcher: p.pitcher.firstName + " " + p.pitcher.lastName,
-          batter: p.batter.firstName + " " + p.batter.lastName,
+          pitcher: p.pitcher,
+          batter: p.batter,
           pitch: p.pitch,
           swing: p.swing,
           diff: p.diff,
@@ -55,6 +57,26 @@ export const PlayTable = (props: PlayTableProps) => {
     return inningTableColumns;
   }, [plays]);
 
+  const LinkCell = (props: TableCellProps) => {
+    const { rowData, dataKey } = props;
+
+    const player = (rowData as TableColumn)[
+      dataKey as keyof TableColumn
+    ] as Player;
+
+    if (player) {
+      return (
+        <Table.Cell {...props}>
+          <Link to={`player/${player.id}`}>
+            {player.firstName + " " + player.lastName}
+          </Link>
+        </Table.Cell>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div>
       <Table isTree defaultExpandAllRows rowKey="id" data={data}>
@@ -65,12 +87,12 @@ export const PlayTable = (props: PlayTableProps) => {
 
         <Table.Column flexGrow={1}>
           <Table.HeaderCell>Pitcher</Table.HeaderCell>
-          <Table.Cell dataKey="pitcher" />
+          <LinkCell dataKey="pitcher" />
         </Table.Column>
 
         <Table.Column flexGrow={1}>
           <Table.HeaderCell>Batter</Table.HeaderCell>
-          <Table.Cell dataKey="batter" />
+          <LinkCell dataKey="batter" />
         </Table.Column>
 
         <Table.Column flexGrow={1}>
