@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useGetGameLog } from "../../../hooks/useGetGameLog/useGetGameLog";
 import Select from "react-select";
 import { useGetGames } from "../../../hooks/useGetGames/useGetGames";
@@ -69,6 +69,69 @@ export const GamePage: React.FC = () => {
     setSelectedActiveTeam(undefined);
     setSelectedTeamsMap(currentLeague === "milr" ? milrTeamsMap : mlrTeamsMap);
   }, [currentLeague]);
+
+  const game = useMemo(() => {
+    return selectedGame
+      ? selectedGame
+      : activeGame && selectedActiveTeam
+      ? activeGame
+      : undefined;
+  }, [selectedGame, activeGame, selectedActiveTeam]);
+
+  const getManOnState = () => {
+    if (game?.firstOccupied && !game?.secondOccupied && !game?.thirdOccupied) {
+      return ", Man on first";
+    } else if (
+      !game?.firstOccupied &&
+      game?.secondOccupied &&
+      !game?.thirdOccupied
+    ) {
+      return ", Man on second";
+    } else if (
+      !game?.firstOccupied &&
+      !game?.secondOccupied &&
+      game?.thirdOccupied
+    ) {
+      return ", Man on third";
+    } else if (
+      game?.firstOccupied &&
+      game?.secondOccupied &&
+      !game?.thirdOccupied
+    ) {
+      return ", Men on first and second";
+    } else if (
+      game?.firstOccupied &&
+      !game?.secondOccupied &&
+      game?.thirdOccupied
+    ) {
+      return ", Men on first and third";
+    } else if (
+      !game?.firstOccupied &&
+      game?.secondOccupied &&
+      game?.thirdOccupied
+    ) {
+      return ", Men of second and third";
+    } else if (
+      game?.firstOccupied &&
+      game?.secondOccupied &&
+      game?.thirdOccupied
+    ) {
+      return ", Bases loaded";
+    }
+
+    return "";
+  };
+
+  const getGameInfo = () => {
+    let gameInfo = `${game?.awayScore} - ${game?.homeScore}`;
+    if (!game?.completed) {
+      gameInfo = `${gameInfo} | ${game?.inning} ${
+        game?.outs
+      } outs ${getManOnState()}`;
+    }
+
+    return gameInfo;
+  };
 
   return (
     <Container style={{ height: "100%" }}>
@@ -171,37 +234,31 @@ export const GamePage: React.FC = () => {
         <FlexboxGrid
           justify="center"
           align="middle"
-          style={{ height: "100%", width: "100%", flexDirection: "column" }}
+          style={{ height: "100%", width: "100%" }}
         >
           {loadingGameLogs || loadingActiveGame ? (
             <Loader size="lg" />
-          ) : (selectedGame || selectedActiveTeam) && gameLog ? (
-            <FlexboxGrid.Item style={{ width: "100%", height: "100%" }}>
-              <Nav
-                appearance={"tabs"}
-                activeKey={selectedTab}
-                onSelect={(e: any) => {
-                  console.log(e);
-                  setSelectedTab(e);
-                }}
-              >
-                <Nav.Item eventKey={0}>
-                  {selectedGame
-                    ? selectedGame.awayTeam.name
-                    : activeGame
-                    ? activeGame.awayTeam.name
-                    : ""}
-                </Nav.Item>
-                <Nav.Item eventKey={1}>
-                  {selectedGame
-                    ? selectedGame.homeTeam.name
-                    : activeGame
-                    ? activeGame.homeTeam.name
-                    : ""}
-                </Nav.Item>
-              </Nav>
+          ) : game && gameLog ? (
+            <>
+              <FlexboxGrid.Item style={{ width: "100%", textAlign: "center" }}>
+                <h3>{`${game?.awayTeam.name} @ ${game?.homeTeam.name}`}</h3>
+                <h5>{`${getGameInfo()}`}</h5>
+              </FlexboxGrid.Item>
 
-              <FlexboxGrid.Item style={{ height: "auto" }}>
+              <FlexboxGrid.Item style={{ width: "100%" }}>
+                <Nav
+                  appearance={"tabs"}
+                  activeKey={selectedTab}
+                  onSelect={(e: any) => {
+                    setSelectedTab(e);
+                  }}
+                >
+                  <Nav.Item eventKey={0}>{game.awayTeam.name}</Nav.Item>
+                  <Nav.Item eventKey={1}>{game.homeTeam.name}</Nav.Item>
+                </Nav>
+              </FlexboxGrid.Item>
+
+              <FlexboxGrid.Item style={{ height: "auto", width: "100%" }}>
                 <PlayTable
                   plays={gameLog
                     .filter(
@@ -221,7 +278,7 @@ export const GamePage: React.FC = () => {
                     .reverse()}
                 />
               </FlexboxGrid.Item>
-            </FlexboxGrid.Item>
+            </>
           ) : (
             "Select a game"
           )}
