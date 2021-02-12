@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetPlayerStats } from "../../../hooks/useGetPlayerStats/useGetPlayerStats";
 import { useGetPlaysByPlayer } from "../../../hooks/useGetPlaysByPlayer/useGetPlaysByPlayer";
+import { LineGraph } from "../../lineGraph/lineGraph";
 import { PlayTable } from "../../playTable/playTable";
 
 interface PlayerPageParams {
@@ -27,7 +28,7 @@ export const PlayerPage: React.FC = () => {
       {"\n"}
       {JSON.stringify(player, null, "\n")}
       {"\n"}
-      {plays && <PlayTable plays={plays} />}
+      {plays && <LineGraph plays={plays} />}
     </>
   );
 };
