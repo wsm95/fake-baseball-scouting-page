@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useGetPlayerStats } from "../../../hooks/useGetPlayerStats/useGetPlayerStats";
 import { useGetPlaysByPlayer } from "../../../hooks/useGetPlaysByPlayer/useGetPlaysByPlayer";
 import { LineGraph } from "../../lineGraph/lineGraph";
-import { PlayTable } from "../../playTable/playTable";
 
 interface PlayerPageParams {
   playerId: string;
