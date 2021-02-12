@@ -67,7 +67,7 @@ export const PlayTable = (props: PlayTableProps) => {
     if (player) {
       return (
         <Table.Cell {...props}>
-          <Link to={`player/${player.id}`}>
+          <Link to={`/player/${player.id}`}>
             {player.firstName + " " + player.lastName}
           </Link>
         </Table.Cell>
