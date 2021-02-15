@@ -443,7 +443,7 @@ export const HeatMap = (props: HeatMapProps) => {
         text: "Pitches"
       }
     }),
-    [plays]
+    []
   );
 
   return (
