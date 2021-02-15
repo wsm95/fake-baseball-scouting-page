@@ -13,7 +13,7 @@ interface PlayerPageParams {
 export const PlayerPage: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const [player, , , fetchPlayerStats] = useGetPlayerStats();
+  const [, , , fetchPlayerStats] = useGetPlayerStats();
   const [plays, loadingPlays, , fetchPlaysByPlayer] = useGetPlaysByPlayer();
   const { playerId } = useParams<PlayerPageParams>();
 
