@@ -64,10 +64,12 @@ export const PlayTable = (props: PlayTableProps) => {
       dataKey as keyof TableColumn
     ] as Player;
 
+    const playType = dataKey === "pitcher" ? "pitching" : "batting";
+
     if (player) {
       return (
         <Table.Cell {...props}>
-          <Link to={`/player/${player.id}`}>
+          <Link to={`/player/${player.id}/${playType}`}>
             {player.firstName + " " + player.lastName}
           </Link>
         </Table.Cell>
