@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
+import Select from "react-select";
 import {
   Container,
   Content,
@@ -23,9 +24,7 @@ interface PlayerPageParams {
 export const PlayerPage: React.FC = () => {
   const { playerId, playType } = useParams<PlayerPageParams>();
   const [selectedTab, setSelectedTab] = useState(0);
-  // const [currentPlayType, setCurrentPlayType] = useState<
-  //   "pitching" | "batting"
-  // >(playType);
+  const [selectedSeason, setSelectedSeason] = useState("6");
 
   const [, , , fetchPlayerStats] = useGetPlayerStats();
   const [plays, loadingPlays, , fetchPlaysByPlayer] = useGetPlaysByPlayer();
@@ -39,6 +38,21 @@ export const PlayerPage: React.FC = () => {
       fetchPlaysByPlayer(playerId, playType);
     }
   }, [playerId, playType, fetchPlayerStats, fetchPlaysByPlayer]);
+
+  const filteredPlays = useMemo(() => {
+    if (plays) {
+      if (selectedSeason === "All") {
+        return plays;
+      } else {
+        return plays.filter(p => p.game.season.toString() === selectedSeason);
+      }
+    }
+
+    return [];
+  }, [plays, selectedSeason]);
+
+  console.log(selectedSeason);
+  console.log(filteredPlays);
 
   return (
     <Container style={{ height: "100%" }}>
@@ -72,6 +86,30 @@ export const PlayerPage: React.FC = () => {
               />
             </FlexboxGrid.Item>
           </FlexboxGrid>
+
+          <FlexboxGrid justify="end" align="middle" style={{ width: "50%" }}>
+            Season:
+            <FlexboxGrid.Item colspan={3} style={{ marginLeft: 4 }}>
+              <Select
+                value={{
+                  label: selectedSeason,
+                  value: selectedSeason
+                }}
+                styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+                menuPortalTarget={document.body}
+                onChange={(season: any) => {
+                  setSelectedSeason(season.value);
+                }}
+                options={["1", "2", "3", "4", "5", "6", "All"].map(s => ({
+                  label: s,
+                  value: s
+                }))}
+              />
+            </FlexboxGrid.Item>
+            <FlexboxGrid colspan={5} justify="end" style={{ marginLeft: 16 }}>
+              <Link to="/game">{"⬅️ Back to Games"}</Link>
+            </FlexboxGrid>
+          </FlexboxGrid>
         </FlexboxGrid>
       </Header>
 
@@ -99,14 +137,20 @@ export const PlayerPage: React.FC = () => {
               </FlexboxGrid>
 
               <FlexboxGrid.Item style={{ height: "100%", width: "100%" }}>
-                {plays ? (
+                {filteredPlays.length > 0 ? (
                   selectedTab === 0 ? (
-                    <LineGraph plays={plays} />
+                    <LineGraph plays={filteredPlays} />
                   ) : (
-                    <HeatMap plays={plays} />
+                    <HeatMap plays={filteredPlays} />
                   )
                 ) : (
-                  "No plays available"
+                  <FlexboxGrid
+                    justify="center"
+                    align="middle"
+                    style={{ height: "100%", width: "100%" }}
+                  >
+                    No plays available
+                  </FlexboxGrid>
                 )}
               </FlexboxGrid.Item>
             </>

@@ -438,10 +438,7 @@ export const HeatMap = (props: HeatMapProps) => {
       dataLabels: {
         enabled: false
       },
-      colors: ["#008FFB"],
-      title: {
-        text: "Pitches"
-      }
+      colors: ["#008FFB"]
     }),
     []
   );
