@@ -1,4 +1,3 @@
-import { FlexboxGrid } from "rsuite";
 import { Player } from "../../interfaces/player";
 
 interface PlayerStatsProps {
@@ -7,7 +6,7 @@ interface PlayerStatsProps {
 }
 
 export const PlayerStats = (props: PlayerStatsProps) => {
-  const { player, statType } = props;
+  const { player } = props;
   console.log(player);
   return (
     <div style={{ width: "100%", textAlign: "center" }}>
