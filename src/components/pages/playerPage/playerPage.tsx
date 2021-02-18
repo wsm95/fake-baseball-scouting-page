@@ -15,6 +15,7 @@ import { useGetPlayerStats } from "../../../hooks/useGetPlayerStats/useGetPlayer
 import { useGetPlaysByPlayer } from "../../../hooks/useGetPlaysByPlayer/useGetPlaysByPlayer";
 import { HeatMap } from "../../heatMap/heatMap";
 import { LineGraph } from "../../lineGraph/lineGraph";
+import { PlayerStats } from "../../playerStats/playerStats";
 
 interface PlayerPageParams {
   playerId: string;
@@ -26,7 +27,7 @@ export const PlayerPage: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedSeason, setSelectedSeason] = useState("6");
 
-  const [, , , fetchPlayerStats] = useGetPlayerStats();
+  const [player, loadingPlayer, , fetchPlayerStats] = useGetPlayerStats();
   const [plays, loadingPlays, , fetchPlaysByPlayer] = useGetPlaysByPlayer();
 
   const { currentLeague, setCurrentLeague } = useLeagueToggleContext();
@@ -119,10 +120,11 @@ export const PlayerPage: React.FC = () => {
           align="middle"
           style={{ height: "100%", width: "100%" }}
         >
-          {loadingPlays ? (
+          {loadingPlays || loadingPlayer ? (
             <Loader size="lg" />
           ) : (
             <>
+              {player && <PlayerStats player={player} statType={playType} />}
               <FlexboxGrid style={{ width: "100%" }}>
                 <Nav
                   appearance={"tabs"}
