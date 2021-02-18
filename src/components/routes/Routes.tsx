@@ -10,7 +10,7 @@ import { PlayerPage } from "../pages/playerPage/playerPage";
 
 export const Routes: React.FC = () => {
   return (
-    <Router basename="/fake-baseball-scouting-page/">
+    <Router>
       <Switch>
         <Redirect exact from="/" to="/game" />
         <Route path="/game">

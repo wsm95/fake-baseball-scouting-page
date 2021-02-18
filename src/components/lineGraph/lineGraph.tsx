@@ -8,7 +8,7 @@ interface LineGraphProps {
 
 export const LineGraph = (props: LineGraphProps) => {
   const { plays } = props;
-  console.log(plays);
+
   const options = useMemo(
     () => ({
       chart: {
