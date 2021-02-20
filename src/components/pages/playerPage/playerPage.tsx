@@ -14,7 +14,7 @@ import { useLeagueToggleContext } from "../../../context/LeagueToggleContext/lea
 import { useGetPlayerStats } from "../../../hooks/useGetPlayerStats/useGetPlayerStats";
 import { useGetPlaysByPlayer } from "../../../hooks/useGetPlaysByPlayer/useGetPlaysByPlayer";
 import { HeatMap } from "../../heatMap/heatMap";
-import { LineGraph } from "../../lineGraph/lineGraph";
+import { PlayGraph } from "../../playGraph/playGraph";
 import { PlayerStats } from "../../playerStats/playerStats";
 
 interface PlayerPageParams {
@@ -141,7 +141,7 @@ export const PlayerPage: React.FC = () => {
               <FlexboxGrid.Item style={{ height: "100%", width: "100%" }}>
                 {filteredPlays.length > 0 ? (
                   selectedTab === 0 ? (
-                    <LineGraph plays={filteredPlays} />
+                    <PlayGraph plays={filteredPlays} />
                   ) : (
                     <HeatMap plays={filteredPlays} />
                   )

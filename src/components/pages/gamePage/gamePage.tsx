@@ -5,7 +5,7 @@ import { useGetGames } from "../../../hooks/useGetGames/useGetGames";
 import { Game } from "../../../interfaces/game";
 import { PlayTable } from "../../playTable/playTable";
 import { Play } from "../../../interfaces/play";
-import { LineGraph } from "../../lineGraph/lineGraph";
+import { PlayGraph } from "../../playGraph/playGraph";
 import {
   Container,
   Content,
@@ -268,7 +268,7 @@ export const GamePage: React.FC = () => {
                     )
                     .reverse()}
                 />
-                <LineGraph
+                <PlayGraph
                   plays={gameLog
                     .filter(
                       (p: Play) =>

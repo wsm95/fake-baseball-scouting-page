@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import { Play } from "../../interfaces/play";
 
-interface LineGraphProps {
+interface PlayGraphProps {
   plays: Play[];
 }
 
-export const LineGraph = (props: LineGraphProps) => {
+export const PlayGraph = (props: PlayGraphProps) => {
   const { plays } = props;
 
   const options = useMemo(
@@ -19,7 +19,9 @@ export const LineGraph = (props: LineGraphProps) => {
         redrawOnParentResize: false
       },
       xaxis: {
-        categories: [...Array(plays.length).keys()].map(x => ++x)
+        categories: plays.map(
+          p => p.beforeState.inning.slice(-1) + "." + p.beforeState.outs
+        )
       },
       markers: {
         size: 5,
