@@ -433,6 +433,9 @@ export const HeatMap = (props: HeatMapProps) => {
         type: "heatmap",
         zoom: {
           enabled: false
+        },
+        animations: {
+          enabled: false
         }
       },
       dataLabels: {

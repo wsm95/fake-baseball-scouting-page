@@ -4,19 +4,23 @@ import { Play } from "../../interfaces/play";
 
 interface PlayGraphProps {
   plays: Play[];
+  animate?: boolean;
 }
 
 export const PlayGraph = (props: PlayGraphProps) => {
-  const { plays } = props;
+  const { plays, animate } = props;
 
   const options = useMemo(
     () => ({
       chart: {
         id: "line",
         zoom: {
-          enabled: false
+          enabled: animate
         },
-        redrawOnParentResize: false
+        redrawOnParentResize: false,
+        animations: {
+          enabled: false
+        }
       },
       xaxis: {
         categories: plays.map(
