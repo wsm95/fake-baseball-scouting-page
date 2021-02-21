@@ -18,6 +18,7 @@ import {
 import { useLeagueToggleContext } from "../../../context/LeagueToggleContext/leagueToggleContext";
 import { mlrTeamsMap, milrTeamsMap } from "../../../data/teamsMaps";
 import { useGetActiveGame } from "../../../hooks/useGetActiveGame/useGetActiveGame";
+import { Link } from "react-router-dom";
 
 export const GamePage: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -174,6 +175,10 @@ export const GamePage: React.FC = () => {
                     })) as any
                 }
               />
+            </FlexboxGrid.Item>
+
+            <FlexboxGrid.Item style={{ marginLeft: 16 }}>
+              <Link to="/player">{"Go to player page ➡️"}</Link>
             </FlexboxGrid.Item>
           </FlexboxGrid>
 

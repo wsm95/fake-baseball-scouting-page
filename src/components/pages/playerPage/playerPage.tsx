@@ -16,10 +16,11 @@ import { useGetPlaysByPlayer } from "../../../hooks/useGetPlaysByPlayer/useGetPl
 import { HeatMap } from "../../heatMap/heatMap";
 import { PlayGraph } from "../../playGraph/playGraph";
 import { PlayerStats } from "../../playerStats/playerStats";
+import { PlayerSearchBar } from "../../playerSearchBar/playerSearchBar";
 
 interface PlayerPageParams {
-  playerId: string;
-  playType: "pitching" | "batting";
+  playerId?: string;
+  playType?: "pitching" | "batting";
 }
 
 export const PlayerPage: React.FC = () => {
@@ -34,7 +35,7 @@ export const PlayerPage: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (playerId) {
+    if (playerId && playType) {
       fetchPlayerStats(playerId);
       fetchPlaysByPlayer(playerId, playType);
     }
@@ -54,6 +55,12 @@ export const PlayerPage: React.FC = () => {
 
   console.log(selectedSeason);
   console.log(filteredPlays);
+
+  const setCurrentPlayer = (newPlayerId: string) => {
+    history.replace(
+      `/player/${newPlayerId}/${!playType ? "pitching" : playType}`
+    );
+  };
 
   return (
     <Container style={{ height: "100%" }}>
@@ -76,7 +83,7 @@ export const PlayerPage: React.FC = () => {
             <FlexboxGrid.Item style={{ marginLeft: 8 }}>
               <Toggle
                 size="md"
-                checked={playType === "pitching"}
+                checked={playType === "pitching" || !playType}
                 onChange={(checked: boolean) => {
                   history.replace(
                     `/player/${playerId}/${checked ? "pitching" : "batting"}`
@@ -85,6 +92,10 @@ export const PlayerPage: React.FC = () => {
                 checkedChildren="Pitching"
                 unCheckedChildren="Batting"
               />
+            </FlexboxGrid.Item>
+
+            <FlexboxGrid.Item style={{ marginLeft: 12, width: 300 }}>
+              <PlayerSearchBar setSelectedPlayer={setCurrentPlayer} />
             </FlexboxGrid.Item>
           </FlexboxGrid>
 
@@ -120,42 +131,50 @@ export const PlayerPage: React.FC = () => {
           align="middle"
           style={{ height: "100%", width: "100%" }}
         >
-          {loadingPlays || loadingPlayer ? (
-            <Loader size="lg" />
-          ) : (
+          {playerId && playType ? (
             <>
-              {player && <PlayerStats player={player} statType={playType} />}
-              <FlexboxGrid style={{ width: "100%" }}>
-                <Nav
-                  appearance={"tabs"}
-                  activeKey={selectedTab}
-                  onSelect={(e: any) => {
-                    setSelectedTab(e);
-                  }}
-                >
-                  <Nav.Item eventKey={0}>Chart</Nav.Item>
-                  <Nav.Item eventKey={1}>Heat map</Nav.Item>
-                </Nav>
-              </FlexboxGrid>
-
-              <FlexboxGrid.Item style={{ height: "100%", width: "100%" }}>
-                {filteredPlays.length > 0 ? (
-                  selectedTab === 0 ? (
-                    <PlayGraph plays={filteredPlays} />
-                  ) : (
-                    <HeatMap plays={filteredPlays} />
-                  )
-                ) : (
-                  <FlexboxGrid
-                    justify="center"
-                    align="middle"
-                    style={{ height: "100%", width: "100%" }}
-                  >
-                    No plays available
+              {loadingPlays || loadingPlayer ? (
+                <Loader size="lg" />
+              ) : (
+                <>
+                  {player && (
+                    <PlayerStats player={player} statType={playType} />
+                  )}
+                  <FlexboxGrid style={{ width: "100%" }}>
+                    <Nav
+                      appearance={"tabs"}
+                      activeKey={selectedTab}
+                      onSelect={(e: any) => {
+                        setSelectedTab(e);
+                      }}
+                    >
+                      <Nav.Item eventKey={0}>Chart</Nav.Item>
+                      <Nav.Item eventKey={1}>Heat map</Nav.Item>
+                    </Nav>
                   </FlexboxGrid>
-                )}
-              </FlexboxGrid.Item>
+
+                  <FlexboxGrid.Item style={{ height: "100%", width: "100%" }}>
+                    {filteredPlays.length > 0 ? (
+                      selectedTab === 0 ? (
+                        <PlayGraph plays={filteredPlays} />
+                      ) : (
+                        <HeatMap plays={filteredPlays} />
+                      )
+                    ) : (
+                      <FlexboxGrid
+                        justify="center"
+                        align="middle"
+                        style={{ height: "100%", width: "100%" }}
+                      >
+                        No plays available
+                      </FlexboxGrid>
+                    )}
+                  </FlexboxGrid.Item>
+                </>
+              )}
             </>
+          ) : (
+            "Search for a player..."
           )}
         </FlexboxGrid>
       </Content>
