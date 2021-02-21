@@ -15,11 +15,11 @@ export const PlayGraph = (props: PlayGraphProps) => {
       chart: {
         id: "line",
         zoom: {
-          enabled: animate
+          enabled: false
         },
         redrawOnParentResize: false,
         animations: {
-          enabled: false
+          enabled: animate
         }
       },
       xaxis: {
@@ -37,7 +37,7 @@ export const PlayGraph = (props: PlayGraphProps) => {
         max: 1000
       }
     }),
-    [plays]
+    [plays, animate]
   );
 
   const series = useMemo(

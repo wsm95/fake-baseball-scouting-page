@@ -281,7 +281,7 @@ export const GamePage: React.FC = () => {
                         (selectedTab === 0 ? "B" : "T")
                     )
                     .reverse()}
-                  animate
+                  animate={true}
                 />
               </FlexboxGrid.Item>
             </>
