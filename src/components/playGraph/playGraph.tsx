@@ -5,6 +5,7 @@ import { Play } from "../../interfaces/play";
 interface PlayGraphProps {
   plays: Play[];
   animate?: boolean;
+  zoom?: boolean;
 }
 
 export const PlayGraph = (props: PlayGraphProps) => {
@@ -15,7 +16,7 @@ export const PlayGraph = (props: PlayGraphProps) => {
       chart: {
         id: "line",
         zoom: {
-          enabled: false
+          enabled: zoom
         },
         redrawOnParentResize: false,
         animations: {

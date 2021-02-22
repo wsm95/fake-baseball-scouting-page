@@ -156,7 +156,7 @@ export const PlayerPage: React.FC = () => {
                   <FlexboxGrid.Item style={{ height: "100%", width: "100%" }}>
                     {filteredPlays.length > 0 ? (
                       selectedTab === 0 ? (
-                        <PlayGraph plays={filteredPlays} />
+                        <PlayGraph plays={filteredPlays} zoom={true} />
                       ) : (
                         <HeatMap plays={filteredPlays} />
                       )
