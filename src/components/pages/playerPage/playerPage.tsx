@@ -58,7 +58,9 @@ export const PlayerPage: React.FC = () => {
 
   const setCurrentPlayer = (newPlayerId: string) => {
     history.replace(
-      `/player/${newPlayerId}/${!playType ? "pitching" : playType}`
+      `/${currentLeague}/player/${newPlayerId}/${
+        !playType ? "pitching" : playType
+      }`
     );
   };
 
@@ -86,7 +88,9 @@ export const PlayerPage: React.FC = () => {
                 checked={playType === "pitching" || !playType}
                 onChange={(checked: boolean) => {
                   history.replace(
-                    `/player/${playerId}/${checked ? "pitching" : "batting"}`
+                    `/${currentLeague}/player/${playerId}/${
+                      checked ? "pitching" : "batting"
+                    }`
                   );
                 }}
                 checkedChildren="Pitching"
@@ -119,7 +123,7 @@ export const PlayerPage: React.FC = () => {
               />
             </FlexboxGrid.Item>
             <FlexboxGrid colspan={5} justify="end" style={{ marginLeft: 16 }}>
-              <Link to="/game">{"⬅️ Back to Games"}</Link>
+              <Link to={`/${currentLeague}/game`}>{"⬅️ Back to Games"}</Link>
             </FlexboxGrid>
           </FlexboxGrid>
         </FlexboxGrid>

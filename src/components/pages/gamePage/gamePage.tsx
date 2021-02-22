@@ -178,7 +178,9 @@ export const GamePage: React.FC = () => {
             </FlexboxGrid.Item>
 
             <FlexboxGrid.Item style={{ marginLeft: 16 }}>
-              <Link to="/player">{"Go to player page ➡️"}</Link>
+              <Link to={`/${currentLeague}/player`}>
+                {"Go to player page ➡️"}
+              </Link>
             </FlexboxGrid.Item>
           </FlexboxGrid>
 

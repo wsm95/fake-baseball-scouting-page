@@ -1,8 +1,13 @@
 import React, { useState, ProviderProps } from "react";
+import { useParams, useHistory, useRouteMatch } from "react-router-dom";
 
 export interface LeagueToggleContextProps {
   currentLeague: "mlr" | "milr";
-  setCurrentLeague: React.Dispatch<React.SetStateAction<"mlr" | "milr">>;
+  setCurrentLeague: (newLeague: "mlr" | "milr") => void;
+}
+
+interface LeagueContextParams {
+  currentLeague: "mlr" | "milr";
 }
 
 interface LeagueToggleContextProviderProps
@@ -18,7 +23,18 @@ export const LeagueToggleContext = React.createContext<
 export const LeagueToggleContextProvider = (
   props: LeagueToggleContextProviderProps
 ) => {
-  const [currentLeague, setCurrentLeague] = useState<"mlr" | "milr">("mlr");
+  // const [currentLeague, setCurrentLeague] = useState<"mlr" | "milr">("mlr");
+
+  const { currentLeague } = useParams<LeagueContextParams>();
+  const history = useHistory();
+
+  const setCurrentLeague = (newLeague: "mlr" | "milr") => {
+    return history.replace(
+      history.location.pathname
+        .replace("mlr", newLeague)
+        .replace("milr", newLeague)
+    );
+  };
 
   return (
     <LeagueToggleContext.Provider
