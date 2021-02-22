@@ -9,7 +9,7 @@ interface PlayGraphProps {
 }
 
 export const PlayGraph = (props: PlayGraphProps) => {
-  const { plays, animate } = props;
+  const { plays, animate, zoom } = props;
 
   const options = useMemo(
     () => ({
@@ -38,7 +38,7 @@ export const PlayGraph = (props: PlayGraphProps) => {
         max: 1000
       }
     }),
-    [plays, animate]
+    [plays, animate, zoom]
   );
 
   const series = useMemo(
