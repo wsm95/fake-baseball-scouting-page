@@ -5,7 +5,6 @@ import { useGetGames } from "../../../hooks/useGetGames/useGetGames";
 import { Game } from "../../../interfaces/game";
 import { PlayTable } from "../../playTable/playTable";
 import { Play } from "../../../interfaces/play";
-import { PlayGraph } from "../../playGraph/playGraph";
 import {
   Container,
   Content,

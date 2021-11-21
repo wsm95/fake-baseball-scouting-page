@@ -1,5 +1,5 @@
-import React, { useState, ProviderProps } from "react";
-import { useParams, useHistory, useRouteMatch } from "react-router-dom";
+import React, { ProviderProps } from "react";
+import { useParams, useHistory } from "react-router-dom";
 
 export interface LeagueToggleContextProps {
   currentLeague: "mlr" | "milr";

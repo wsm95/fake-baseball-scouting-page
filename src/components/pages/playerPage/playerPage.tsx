@@ -1,11 +1,5 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import Select from "react-select";
 import {
   Container,
@@ -18,14 +12,9 @@ import {
   Toggle
 } from "rsuite";
 import { useLeagueToggleContext } from "../../../context/LeagueToggleContext/leagueToggleContext";
-import { useGetPlayerStats } from "../../../hooks/useGetPlayerStats/useGetPlayerStats";
-import { useGetPlaysByPlayer } from "../../../hooks/useGetPlaysByPlayer/useGetPlaysByPlayer";
 import { HeatMap } from "../../heatMap/heatMap";
 import { PlayGraph } from "../../playGraph/playGraph";
-import { PlayerStats } from "../../playerStats/playerStats";
-import { PlayerSearchBar } from "../../playerSearchBar/playerSearchBar";
 import { useGetPlateAppearances } from "../../../hooks/useGetPlateAppearances/useGetPlateAppearances";
-import { useDebounce } from "../../../hooks/useDebounce/useDebounce";
 
 interface PlayerPageParams {
   playerId?: string;

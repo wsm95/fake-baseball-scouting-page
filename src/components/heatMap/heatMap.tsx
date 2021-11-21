@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { Play } from "../../interfaces/play";
 import ReactApexChart from "react-apexcharts";
 import { PlateAppearance } from "../../interfaces/plateAppearance";
 

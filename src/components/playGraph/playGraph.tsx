@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 import { PlateAppearance } from "../../interfaces/plateAppearance";
-import { Play } from "../../interfaces/play";
 
 interface PlayGraphProps {
   plateAppearances: PlateAppearance[];
