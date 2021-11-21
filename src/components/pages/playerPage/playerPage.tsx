@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Select from "react-select";
 import {
@@ -6,6 +12,7 @@ import {
   Content,
   FlexboxGrid,
   Header,
+  Input,
   Loader,
   Nav,
   Toggle
@@ -17,6 +24,8 @@ import { HeatMap } from "../../heatMap/heatMap";
 import { PlayGraph } from "../../playGraph/playGraph";
 import { PlayerStats } from "../../playerStats/playerStats";
 import { PlayerSearchBar } from "../../playerSearchBar/playerSearchBar";
+import { useGetPlateAppearances } from "../../../hooks/useGetPlateAppearances/useGetPlateAppearances";
+import { useDebounce } from "../../../hooks/useDebounce/useDebounce";
 
 interface PlayerPageParams {
   playerId?: string;
@@ -26,43 +35,63 @@ interface PlayerPageParams {
 export const PlayerPage: React.FC = () => {
   const { playerId, playType } = useParams<PlayerPageParams>();
   const [selectedTab, setSelectedTab] = useState(0);
-  const [selectedSeason, setSelectedSeason] = useState("6");
+  const [currentPlayerId, setCurrentPlayerId] = useState(playerId ?? "");
+  const [selectedSeason, setSelectedSeason] = useState("7");
 
-  const [player, loadingPlayer, , fetchPlayerStats] = useGetPlayerStats();
-  const [plays, loadingPlays, , fetchPlaysByPlayer] = useGetPlaysByPlayer();
+  // const [player, loadingPlayer, , fetchPlayerStats] = useGetPlayerStats();
+  const [
+    plateAppearances,
+    loadingPlateAppearances,
+    ,
+    fetchPlateAppearances
+  ] = useGetPlateAppearances();
 
   const { currentLeague, setCurrentLeague } = useLeagueToggleContext();
+
   const history = useHistory();
 
   useEffect(() => {
     if (playerId && playType) {
-      fetchPlayerStats(playerId);
-      fetchPlaysByPlayer(playerId, playType);
+      // fetchPlayerStats(playerId);
+      fetchPlateAppearances(playerId, playType);
     }
-  }, [playerId, playType, fetchPlayerStats, fetchPlaysByPlayer]);
+  }, [playerId, playType, currentLeague, fetchPlateAppearances]);
 
-  const filteredPlays = useMemo(() => {
-    if (plays) {
+  const filteredPlateAppearances = useMemo(() => {
+    if (plateAppearances) {
       if (selectedSeason === "All") {
-        return plays;
+        return plateAppearances;
       } else {
-        return plays.filter(p => p.game.season.toString() === selectedSeason);
+        return plateAppearances.filter(
+          p => p.season.toString() === selectedSeason
+        );
       }
     }
 
     return [];
-  }, [plays, selectedSeason]);
+  }, [plateAppearances, selectedSeason]);
 
   console.log(selectedSeason);
-  console.log(filteredPlays);
+  console.log(filteredPlateAppearances);
 
-  const setCurrentPlayer = (newPlayerId: string) => {
-    history.replace(
-      `/${currentLeague}/player/${newPlayerId}/${
-        !playType ? "pitching" : playType
-      }`
-    );
-  };
+  const timeout = useRef<number>(-1);
+  // const setCurrentPlayer = useCallback(
+  //   (newPlayerId: string) => {
+
+  //   },
+  //   [setCurrentPlayerId]
+  // );
+
+  useEffect(() => {
+    window.clearTimeout(timeout.current);
+    timeout.current = window.setTimeout(async () => {
+      history.replace(
+        `/${currentLeague}/player/${
+          !playType ? "pitching" : playType
+        }/${currentPlayerId}`
+      );
+    }, 300);
+  }, [currentPlayerId, currentLeague, playType]);
 
   return (
     <Container style={{ height: "100%" }}>
@@ -88,9 +117,9 @@ export const PlayerPage: React.FC = () => {
                 checked={playType === "pitching" || !playType}
                 onChange={(checked: boolean) => {
                   history.replace(
-                    `/${currentLeague}/player/${playerId}/${
+                    `/${currentLeague}/player/${
                       checked ? "pitching" : "batting"
-                    }`
+                    }/${currentPlayerId}`
                   );
                 }}
                 checkedChildren="Pitching"
@@ -98,12 +127,19 @@ export const PlayerPage: React.FC = () => {
               />
             </FlexboxGrid.Item>
 
-            <FlexboxGrid.Item style={{ marginLeft: 12, width: 300 }}>
+            {/* <FlexboxGrid.Item style={{ marginLeft: 12, width: 300 }}>
               <PlayerSearchBar setSelectedPlayer={setCurrentPlayer} />
-            </FlexboxGrid.Item>
+            </FlexboxGrid.Item> */}
           </FlexboxGrid>
 
           <FlexboxGrid justify="end" align="middle" style={{ width: "50%" }}>
+            <FlexboxGrid.Item style={{ marginRight: 12, width: 150 }}>
+              <Input
+                value={currentPlayerId}
+                onChange={setCurrentPlayerId}
+                placeholder={playerId ?? "Enter Player Id"}
+              />
+            </FlexboxGrid.Item>
             Season:
             <FlexboxGrid.Item colspan={3} style={{ marginLeft: 4 }}>
               <Select
@@ -116,15 +152,15 @@ export const PlayerPage: React.FC = () => {
                 onChange={(season: any) => {
                   setSelectedSeason(season.value);
                 }}
-                options={["1", "2", "3", "4", "5", "6", "All"].map(s => ({
+                options={["1", "2", "3", "4", "5", "6", "7", "All"].map(s => ({
                   label: s,
                   value: s
                 }))}
               />
             </FlexboxGrid.Item>
-            <FlexboxGrid colspan={5} justify="end" style={{ marginLeft: 16 }}>
+            {/* <FlexboxGrid colspan={5} justify="end" style={{ marginLeft: 16 }}>
               <Link to={`/${currentLeague}/game`}>{"⬅️ Back to Games"}</Link>
-            </FlexboxGrid>
+            </FlexboxGrid> */}
           </FlexboxGrid>
         </FlexboxGrid>
       </Header>
@@ -137,13 +173,13 @@ export const PlayerPage: React.FC = () => {
         >
           {playerId && playType ? (
             <>
-              {loadingPlays || loadingPlayer ? (
+              {loadingPlateAppearances ? (
                 <Loader size="lg" />
               ) : (
                 <>
-                  {player && (
+                  {/* {player && (
                     <PlayerStats player={player} statType={playType} />
-                  )}
+                  )} */}
                   <FlexboxGrid style={{ width: "100%" }}>
                     <Nav
                       appearance={"tabs"}
@@ -158,11 +194,14 @@ export const PlayerPage: React.FC = () => {
                   </FlexboxGrid>
 
                   <FlexboxGrid.Item style={{ height: "100%", width: "100%" }}>
-                    {filteredPlays.length > 0 ? (
+                    {filteredPlateAppearances.length > 0 ? (
                       selectedTab === 0 ? (
-                        <PlayGraph plays={filteredPlays} zoom={true} />
+                        <PlayGraph
+                          plateAppearances={filteredPlateAppearances}
+                          zoom={true}
+                        />
                       ) : (
-                        <HeatMap plays={filteredPlays} />
+                        <HeatMap plateAppearances={filteredPlateAppearances} />
                       )
                     ) : (
                       <FlexboxGrid

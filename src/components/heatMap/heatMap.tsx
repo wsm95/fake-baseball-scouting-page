@@ -1,13 +1,14 @@
 import { useMemo } from "react";
 import { Play } from "../../interfaces/play";
 import ReactApexChart from "react-apexcharts";
+import { PlateAppearance } from "../../interfaces/plateAppearance";
 
 interface HeatMapProps {
-  plays: Play[];
+  plateAppearances: PlateAppearance[];
 }
 
 export const HeatMap = (props: HeatMapProps) => {
-  const { plays } = props;
+  const { plateAppearances } = props;
 
   const series = useMemo(
     () => [
@@ -16,7 +17,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "0-25",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 0 && p.pitch < 26 && a.push(p.pitch), a
               ),
@@ -25,7 +26,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "26-50",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 25 && p.pitch < 51 && a.push(p.pitch), a
               ),
@@ -34,7 +35,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "51-75",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 50 && p.pitch < 76 && a.push(p.pitch), a
               ),
@@ -43,7 +44,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "75-100",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 75 && p.pitch < 101 && a.push(p.pitch), a
               ),
@@ -57,7 +58,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "100-125",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 100 && p.pitch < 126 && a.push(p.pitch), a
               ),
@@ -66,7 +67,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "126-150",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 125 && p.pitch < 151 && a.push(p.pitch), a
               ),
@@ -75,7 +76,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "151-175",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 150 && p.pitch < 176 && a.push(p.pitch), a
               ),
@@ -84,7 +85,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "175-200",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 175 && p.pitch < 201 && a.push(p.pitch), a
               ),
@@ -98,7 +99,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "200-225",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 200 && p.pitch < 226 && a.push(p.pitch), a
               ),
@@ -107,7 +108,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "226-250",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 225 && p.pitch < 251 && a.push(p.pitch), a
               ),
@@ -116,7 +117,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "252-275",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 250 && p.pitch < 276 && a.push(p.pitch), a
               ),
@@ -125,7 +126,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "275-300",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 275 && p.pitch < 301 && a.push(p.pitch), a
               ),
@@ -139,7 +140,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "300-325",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 300 && p.pitch < 326 && a.push(p.pitch), a
               ),
@@ -148,7 +149,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "326-350",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 325 && p.pitch < 351 && a.push(p.pitch), a
               ),
@@ -157,7 +158,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "351-375",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 350 && p.pitch < 376 && a.push(p.pitch), a
               ),
@@ -166,7 +167,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "375-400",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 375 && p.pitch < 401 && a.push(p.pitch), a
               ),
@@ -180,7 +181,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "400-425",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 400 && p.pitch < 426 && a.push(p.pitch), a
               ),
@@ -189,7 +190,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "426-450",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 425 && p.pitch < 451 && a.push(p.pitch), a
               ),
@@ -198,7 +199,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "451-475",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 450 && p.pitch < 476 && a.push(p.pitch), a
               ),
@@ -207,7 +208,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "475-500",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 475 && p.pitch < 501 && a.push(p.pitch), a
               ),
@@ -221,7 +222,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "500-525",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 500 && p.pitch < 526 && a.push(p.pitch), a
               ),
@@ -230,7 +231,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "526-550",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 525 && p.pitch < 551 && a.push(p.pitch), a
               ),
@@ -239,7 +240,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "551-575",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 550 && p.pitch < 576 && a.push(p.pitch), a
               ),
@@ -248,7 +249,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "575-600",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 575 && p.pitch < 601 && a.push(p.pitch), a
               ),
@@ -262,7 +263,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "600-625",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 600 && p.pitch < 626 && a.push(p.pitch), a
               ),
@@ -271,7 +272,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "626-650",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 625 && p.pitch < 651 && a.push(p.pitch), a
               ),
@@ -280,7 +281,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "651-675",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 650 && p.pitch < 676 && a.push(p.pitch), a
               ),
@@ -289,7 +290,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "675-700",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 675 && p.pitch < 701 && a.push(p.pitch), a
               ),
@@ -303,7 +304,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "700-725",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 700 && p.pitch < 726 && a.push(p.pitch), a
               ),
@@ -312,7 +313,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "726-750",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 725 && p.pitch < 751 && a.push(p.pitch), a
               ),
@@ -321,7 +322,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "751-775",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 750 && p.pitch < 776 && a.push(p.pitch), a
               ),
@@ -330,7 +331,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "775-800",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 775 && p.pitch < 801 && a.push(p.pitch), a
               ),
@@ -344,7 +345,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "800-825",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 800 && p.pitch < 826 && a.push(p.pitch), a
               ),
@@ -353,7 +354,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "826-850",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 825 && p.pitch < 851 && a.push(p.pitch), a
               ),
@@ -362,7 +363,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "851-875",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 850 && p.pitch < 876 && a.push(p.pitch), a
               ),
@@ -371,7 +372,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "875-900",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 875 && p.pitch < 901 && a.push(p.pitch), a
               ),
@@ -386,7 +387,7 @@ export const HeatMap = (props: HeatMapProps) => {
         data: [
           {
             x: "900-925",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 900 && p.pitch < 926 && a.push(p.pitch), a
               ),
@@ -395,7 +396,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "926-950",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 925 && p.pitch < 951 && a.push(p.pitch), a
               ),
@@ -404,7 +405,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "951-975",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 950 && p.pitch < 976 && a.push(p.pitch), a
               ),
@@ -413,7 +414,7 @@ export const HeatMap = (props: HeatMapProps) => {
           },
           {
             x: "975-1000",
-            y: plays.reduce(
+            y: plateAppearances.reduce(
               (a: number[], p) => (
                 p.pitch > 975 && p.pitch < 1001 && a.push(p.pitch), a
               ),
@@ -423,7 +424,7 @@ export const HeatMap = (props: HeatMapProps) => {
         ]
       }
     ],
-    [plays]
+    [plateAppearances]
   );
 
   const options = useMemo(

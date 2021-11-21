@@ -34,7 +34,7 @@ const Pages = () => {
       <Route path={`${path}/game`}>
         <GamePage />
       </Route>
-      <Route path={`${path}/player/:playerId?/:playType?`}>
+      <Route path={`${path}/player/:playType?/:playerId?`}>
         <PlayerPage />
       </Route>
     </Switch>

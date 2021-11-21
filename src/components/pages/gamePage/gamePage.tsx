@@ -275,7 +275,7 @@ export const GamePage: React.FC = () => {
                     )
                     .reverse()}
                 />
-                <PlayGraph
+                {/* <PlayGraph
                   plays={gameLog
                     .filter(
                       (p: Play) =>
@@ -284,7 +284,7 @@ export const GamePage: React.FC = () => {
                     )
                     .reverse()}
                   animate={true}
-                />
+                /> */}
               </FlexboxGrid.Item>
             </>
           ) : (
