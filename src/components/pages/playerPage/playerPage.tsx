@@ -80,7 +80,7 @@ export const PlayerPage: React.FC = () => {
         }/${currentPlayerId}`
       );
     }, 300);
-  }, [currentPlayerId, currentLeague, playType]);
+  }, [history, currentPlayerId, currentLeague, playType]);
 
   return (
     <Container style={{ height: "100%" }}>
